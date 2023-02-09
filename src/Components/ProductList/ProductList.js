@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Products from "../JsonData/Products";
 import styled from "styled-components";
 import Cart from "../Cart/Cart";
+import SizeFilter from "../SizeFilter/SizeFilter";
 
 const ProductList = () => {
   const [countItem, setCountItem] = useState(0);
@@ -57,52 +58,8 @@ const ProductList = () => {
     setCountItem(countItem - 1);
   };
 
-  // Filter the products using size.
-  const handleSizeFilter = (e) => {
-    const { value, checked } = e.target;
-    checked
-      ? setSizeFilter([...sizeFilter, value])
-      : setSizeFilter(sizeFilter.filter((filterSize) => filterSize !== value));
-  };
   return (
     <>
-      <SizeWrapper>
-        <SizeLabel>Sizes: </SizeLabel>
-        <StyledCheckbox
-          type="checkbox"
-          value="S"
-          onChange={handleSizeFilter}
-          checked={sizeFilter.includes("S")}
-        />
-        <StyledCheckbox
-          type="checkbox"
-          value="M"
-          onChange={handleSizeFilter}
-          checked={sizeFilter.includes("M")}
-        />
-
-        <StyledCheckbox
-          type="checkbox"
-          value="L"
-          onChange={handleSizeFilter}
-          checked={sizeFilter.includes("L")}
-        />
-
-        <StyledCheckbox
-          type="checkbox"
-          value="X"
-          onChange={handleSizeFilter}
-          checked={sizeFilter.includes("X")}
-        />
-
-        <StyledCheckbox
-          type="checkbox"
-          value="XL"
-          onChange={handleSizeFilter}
-          checked={sizeFilter.includes("XL")}
-        />
-      </SizeWrapper>
-
       <ProductCount>{Products.length} Product(s) found</ProductCount>
       <Section>
         {Products.filter(
@@ -122,7 +79,7 @@ const ProductList = () => {
           );
         })}
       </Section>
-
+        <SizeFilter sizeFilter={sizeFilter} setSizeFilter={setSizeFilter}/>
       <Cart
         countItem={countItem}
         setCountItem={setCountItem}
@@ -149,30 +106,6 @@ const Button = styled.button`
   transition: background-color 0.2s ease;
   &:hover {
     background-color: #eabf00;
-  }
-`;
-const SizeWrapper = styled.div`
-  width: 171px;
-  position: absolute;
-  top: 86px;
-  left: 46px;
-`;
-const SizeLabel = styled.div`
-  font-weight: bold;
-`;
-const StyledCheckbox = styled.input`
-  appearance: none;
-  max-width: 35px;
-  width: 100%;
-  height: 35px;
-  border: 2px solid #333;
-  border-radius: 50%;
-  margin: 10px;
-  outline: none;
-  cursor: pointer;
-
-  &:checked {
-    background-color: #333;
   }
 `;
 

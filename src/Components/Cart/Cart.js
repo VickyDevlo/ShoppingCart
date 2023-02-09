@@ -59,7 +59,7 @@ const Cart = ({
                     <SizeTag>
                       {data.size} {data.label}
                     </SizeTag>
-                    <QtyTag>Quantity:{data.quantity}</QtyTag>
+                    <QtyTag>Quantity: {data.quantity}</QtyTag>
                   </InfoWrapper>
                 </CardWrapper>
 

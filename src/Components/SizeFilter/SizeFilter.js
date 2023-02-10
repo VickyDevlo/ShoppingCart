@@ -10,15 +10,21 @@ const SizeFilter = ({ sizeFilter, setSizeFilter }) => {
       ? setSizeFilter([...sizeFilter, value])
       : setSizeFilter(sizeFilter.filter((filterSize) => filterSize !== value));
   };
+  const clickhandler = () => {
+    handleSizeFilter();
+    alert("clicked");
+  };
   return (
     <SizeWrapper>
       <Title>Sizes: </Title>
+
       <StyledCheckbox
         type="checkbox"
         value="S"
         onChange={handleSizeFilter}
         checked={sizeFilter.includes("S")}
       />
+
       <StyledCheckbox
         type="checkbox"
         value="M"
@@ -65,6 +71,7 @@ const StyledCheckbox = styled.input`
   max-width: 35px;
   width: 100%;
   height: 35px;
+  z-index: 99999;
 
   border-radius: 50%;
   margin: 10px;
@@ -77,6 +84,22 @@ const StyledCheckbox = styled.input`
   &:hover {
     border: 1px solid black;
   }
+`;
+const LabelTag = styled.span`
+  position: absolute;
+  top: 28px;
+  left: 10px;
+  width: 35px;
+  height: 35px;
+  font-size: 0.8em;
+  border-radius: 50%;
+  cursor: pointer;
+  box-sizing: border-box;
+  line-height: 35px;
+  text-align: center;
+  color: rgb(27, 26, 32);
+  background-color: rgb(236, 236, 236);
+  border: 1px solid transparent;
 `;
 
 export default SizeFilter;

@@ -26,7 +26,7 @@ const ProductList = () => {
     setIsOpen(true);
   };
 
-  //Remove product from the cart and set the count.
+  //Remove product and price from the cart.
   const removeFromCart = (data) => {
     setCartItem(cartItem.filter((product) => product.id !== data.id));
     setCountItem(countItem - data.quantity);
@@ -110,7 +110,7 @@ const Button = styled.button`
 const ProductCount = styled.div`
   position: absolute;
   top: 32px;
-  left: 297px;
+  left: 308px;
 `;
 const Tag = styled.span`
   position: absolute;

@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const SizeFilter = ({ sizeFilter, setSizeFilter }) => {
-    
   // Filter the products using size.
   const handleSizeFilter = (e) => {
     const { value, checked } = e.target;
+    console.log("value", value, "checked", checked);
     checked
       ? setSizeFilter([...sizeFilter, value])
       : setSizeFilter(sizeFilter.filter((filterSize) => filterSize !== value));
   };
   return (
     <SizeWrapper>
-      <SizeLabel>Sizes: </SizeLabel>
+      <Title>Sizes: </Title>
       <StyledCheckbox
         type="checkbox"
         value="S"
@@ -24,6 +24,7 @@ const SizeFilter = ({ sizeFilter, setSizeFilter }) => {
         value="M"
         onChange={handleSizeFilter}
         checked={sizeFilter.includes("M")}
+        label="M"
       />
 
       <StyledCheckbox
@@ -56,7 +57,7 @@ const SizeWrapper = styled.div`
   top: 86px;
   left: 46px;
 `;
-const SizeLabel = styled.div`
+const Title = styled.div`
   font-weight: bold;
 `;
 const StyledCheckbox = styled.input`

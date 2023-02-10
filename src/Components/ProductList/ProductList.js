@@ -26,7 +26,7 @@ const ProductList = () => {
     setIsOpen(true);
   };
 
-  //Remove item from the cart and set the count.
+  //Remove product from the cart and set the count.
   const removeFromCart = (data) => {
     setCartItem(cartItem.filter((product) => product.id !== data.id));
     setCountItem(countItem - data.quantity);
@@ -34,7 +34,6 @@ const ProductList = () => {
 
   // Increment the product qty.
   const incQtyHandler = (itemsData) => {
-    console.log("incqty", itemsData);
     setCartItem(
       cartItem.map((product) =>
         product.id === itemsData.id
@@ -47,7 +46,6 @@ const ProductList = () => {
 
   // Decrement the product qty.
   const decQtyHandler = (itemsData) => {
-    console.log("decqty", itemsData);
     setCartItem(
       cartItem.map((product) =>
         product.id === itemsData.id
@@ -64,9 +62,9 @@ const ProductList = () => {
       <Section>
         {Products.filter(
           (product) => !sizeFilter.length || sizeFilter.includes(product.size)
-        ).map((items, i) => {
+        ).map((items) => {
           return (
-            <Wrapper key={i}>
+            <Wrapper key={items.id}>
               <ImageTag src={items.img} alt="prodcut_img" />
               {items.shippingTag === "Free shipping" && (
                 <Tag>{items.shippingTag}</Tag>
@@ -79,7 +77,7 @@ const ProductList = () => {
           );
         })}
       </Section>
-        <SizeFilter sizeFilter={sizeFilter} setSizeFilter={setSizeFilter}/>
+      <SizeFilter sizeFilter={sizeFilter} setSizeFilter={setSizeFilter} />
       <Cart
         countItem={countItem}
         setCountItem={setCountItem}
@@ -154,7 +152,7 @@ const Underlined = styled.div`
   margin-left: -10px;
 `;
 const Section = styled.section`
-  width: 61%;
+  width: 60%;
   display: grid;
   margin: 50px auto;
   grid-template-columns: repeat(4, 1fr);

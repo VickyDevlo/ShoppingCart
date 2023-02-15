@@ -60,6 +60,8 @@ const ProductList = () => {
     <>
       <ProductCount>{Products.length} Product(s) found</ProductCount>
       <Section>
+        <SizeFilter sizeFilter={sizeFilter} setSizeFilter={setSizeFilter} />
+
         {Products.filter(
           (product) => !sizeFilter.length || sizeFilter.includes(product.size)
         ).map((items) => {
@@ -71,13 +73,12 @@ const ProductList = () => {
               )}
               <Title>{items.title}</Title>
               <Underlined />
-              <PriceTag> ${items.price}</PriceTag>
+              <PriceTag> ${items.price.toFixed(2)}</PriceTag>
               <Button onClick={() => AddItemHandler(items)}>Add to cart</Button>
             </Wrapper>
           );
         })}
       </Section>
-      <SizeFilter sizeFilter={sizeFilter} setSizeFilter={setSizeFilter} />
       <Cart
         countItem={countItem}
         setCountItem={setCountItem}
@@ -108,9 +109,17 @@ const Button = styled.button`
 `;
 
 const ProductCount = styled.div`
-  position: absolute;
-  top: 32px;
+  position: relative;
   left: 308px;
+  top: 39px;
+  width: fit-content;
+  z-index: 1;
+
+  @media screen and (max-width: 765px) {
+    left: 8px;
+    top: 61px;
+    margin-top: 64px;
+  }
 `;
 const Tag = styled.span`
   position: absolute;
@@ -150,11 +159,21 @@ const Underlined = styled.div`
   top: 78%;
   left: 50%;
   margin-left: -10px;
+  @media screen and (max-width: 783px) {
+    top: 80%;
+  }
 `;
 const Section = styled.section`
   width: 60%;
   display: grid;
   margin: 50px auto;
   grid-template-columns: repeat(4, 1fr);
+
+  @media screen and (max-width: 783px) {
+    width: 100%;
+    display: grid;
+    margin: 50px auto;
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 export default ProductList;

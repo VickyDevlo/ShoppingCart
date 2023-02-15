@@ -1,6 +1,7 @@
 import React from "react";
 import CartIcon from "../Image/CartIcon.png";
 import styled from "styled-components";
+import CustomScrollbar from "../CustomScrollBar/CustomScrollbar";
 
 const Cart = ({
   countItem,
@@ -16,7 +17,6 @@ const Cart = ({
     (sum, product) => sum + parseInt(product.price * product.quantity),
     0
   );
-
   // checkout function.
   const checkoutHandler = () => {
     countItem < 1
@@ -39,13 +39,13 @@ const Cart = ({
             <ImgTag isOpen src={CartIcon} alt="cart_img" />
             <CartCount isOpen>{countItem}</CartCount>
             <CartLabel>Cart</CartLabel>
+            {countItem < 1 && (
+              <>
+                <TextMsg>Add some products in the cart</TextMsg>
+                <TextMsg msg>:)</TextMsg>
+              </>
+            )}
           </InnerContainer>
-          {countItem < 1 && (
-            <>
-              <TextMsg>Add some products in the cart</TextMsg>
-              <TextMsg msg>:)</TextMsg>
-            </>
-          )}
           {cartItem.map((data, index) => {
             return (
               <Container key={index}>
@@ -64,7 +64,7 @@ const Cart = ({
                   <DeleteItem onClick={() => removeFromCart(data)}>
                     x
                   </DeleteItem>
-                  <PriceTag>${data.price}</PriceTag>
+                  <PriceTag>${data.price.toFixed(2)}</PriceTag>
                   {/* <PriceTag>${data.price * data.quantity}</PriceTag> */}
                   <QtyButtonWrapper>
                     <Button
@@ -106,15 +106,22 @@ const CartWrapper = styled.div`
 const ImgTag = styled.img`
   width: 25px;
   height: 26px;
-  position: relative;
+  position: absolute;
   left: ${({ isOpen }) => (isOpen ? "215px" : "")};
+
+  @media screen and (max-width: 765px) {
+    left: ${({ isOpen }) => (isOpen ? "225px" : "11px")};
+  }
 `;
 const CartLabel = styled.div`
-  position: absolute;
+  position: relative;
   top: 3px;
-  right: 146px;
+  left: 280px;
   font-size: 18px;
   font-weight: bold;
+  @media screen and (max-width: 765px) {
+   width: fit-content;
+  }
 `;
 const TitleTag = styled.div`
   color: white;
@@ -131,7 +138,8 @@ const PriceTag = styled.div`
 `;
 const TextMsg = styled.div`
   text-align: center;
-  line-height: ${({ msg }) => (msg ? "80px" : "0")};
+  margin-top: 40px;
+  /* line-height: ${({ msg }) => (msg ? "5px" : "0")}; */
 `;
 const ProductImgTag = styled.img`
   position: relative;
@@ -148,9 +156,9 @@ const TotalPrice = styled.span`
 `;
 
 const CartCount = styled.div`
-  position: absolute;
-  right: ${({ isOpen }) => (isOpen ? "201px" : "8px")};
-  top: ${({ isOpen }) => (isOpen ? "24px" : "33px")};
+  position: relative;
+  right: ${({ isOpen }) => (isOpen ? "-229px" : "-14px")};
+  top: ${({ isOpen }) => (isOpen ? "24px" : "25px")};
   width: 18px;
   height: 18px;
   color: rgb(12, 11, 16);
@@ -160,31 +168,29 @@ const CartCount = styled.div`
   line-height: 18px;
   border-radius: 50%;
   background-color: #eabf00;
+  @media screen and (max-width: 765px) {
+    right: ${({ isOpen }) => (isOpen ? "-239px" : "-14px")};
+  }
 `;
 const CartContainer = styled.div`
   background-color: #1b1a20;
   color: white;
   width: 450px;
   height: 100vh;
+  z-index: 2;
   position: fixed;
   top: 0;
-  right: ${({ isOpen }) => (isOpen ? "2px" : "-450px")};
+  right: ${({ isOpen }) => (isOpen ? "2px" : "-457px")};
   transition: all 0.2s ease-out;
-  z-index: 2;
-`;
-const CustomScrollbar = styled.div`
-  height: 569px;
-  width: 455px;
-  overflow-y: scroll;
-  ::-webkit-scrollbar {
-    width: 5px;
-    background-color: #1b1a20;
-  }
-  ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #1b1a20;
+
+  @media screen and (max-width: 765px) {
+    width: 100%;
+    right: ${({ isOpen }) => (isOpen ? "0" : "-770px")};
+    display: flex;
+    justify-content: center;
   }
 `;
+
 const CloseButton = styled.button`
   position: absolute;
   left: -49px;
@@ -198,16 +204,28 @@ const CloseButton = styled.button`
   &:focus {
     outline: none;
   }
+  @media screen and (max-width: 765px) {
+    left: 0;
+    z-index: 2;
+  }
 `;
 const InnerContainer = styled.div`
   position: relative;
   margin: 56px auto;
+  @media screen and (max-width: 765px) {
+    margin: 57px 50px;
+  }
 `;
 const Container = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
   border-top: 1px solid black;
+
+  @media screen and (max-width: 765px) {
+    justify-content: space-between;
+    padding: 0 12px;
+  }
 `;
 const CardWrapper = styled.div`
   display: flex;
@@ -255,10 +273,19 @@ const CheckoutCard = styled.div`
   z-index: 2;
   background-color: #1b1a20;
   box-shadow: 0 -3px 8px rgb(0 0 0 / 26%);
+
+  @media screen and (max-width: 765px) {
+    max-width: 766px;
+    width: 100%;
+  }
 `;
 const TotalWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 0 6px;
+  @media screen and (min-width: 500px) and (max-width:765px) {
+    padding: 0 20px;
+  }
 `;
 
 const InfoWrapper = styled.div`

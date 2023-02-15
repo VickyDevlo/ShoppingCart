@@ -1,8 +1,8 @@
-import "./App.css"; 
+import "./App.css";
 import ProductList from "./Components/ProductList/ProductList";
 function App() {
   return (
-    <div> 
+    <div className="App">
       <ProductList />
     </div>
   );

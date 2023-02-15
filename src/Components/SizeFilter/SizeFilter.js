@@ -1,30 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const SizeFilter = ({ sizeFilter, setSizeFilter }) => {
+  
   // Filter the products using size.
   const handleSizeFilter = (e) => {
     const { value, checked } = e.target;
-    console.log("value", value, "checked", checked);
     checked
       ? setSizeFilter([...sizeFilter, value])
       : setSizeFilter(sizeFilter.filter((filterSize) => filterSize !== value));
   };
-  const clickhandler = () => {
-    handleSizeFilter();
-    alert("clicked");
-  };
+
   return (
     <SizeWrapper>
       <Title>Sizes: </Title>
-
       <StyledCheckbox
         type="checkbox"
         value="S"
         onChange={handleSizeFilter}
         checked={sizeFilter.includes("S")}
       />
-
+      <LabelTag>S</LabelTag>
       <StyledCheckbox
         type="checkbox"
         value="M"
@@ -32,13 +28,14 @@ const SizeFilter = ({ sizeFilter, setSizeFilter }) => {
         checked={sizeFilter.includes("M")}
         label="M"
       />
-
+      <LabelTag>M</LabelTag>
       <StyledCheckbox
         type="checkbox"
         value="L"
         onChange={handleSizeFilter}
         checked={sizeFilter.includes("L")}
       />
+      <LabelTag>L</LabelTag>
 
       <StyledCheckbox
         type="checkbox"
@@ -46,35 +43,41 @@ const SizeFilter = ({ sizeFilter, setSizeFilter }) => {
         onChange={handleSizeFilter}
         checked={sizeFilter.includes("X")}
       />
-
+      <LabelTag>X</LabelTag>
       <StyledCheckbox
         type="checkbox"
         value="XL"
         onChange={handleSizeFilter}
         checked={sizeFilter.includes("XL")}
       />
+      <LabelTag>XL</LabelTag>
     </SizeWrapper>
   );
 };
 
 const SizeWrapper = styled.div`
-  width: 171px;
+  width: 210px;
   position: absolute;
-  top: 86px;
-  left: 46px;
+  top: 45px;
+  padding: 5px;
+  left: 55px;
+  @media screen and (max-width: 783px) {
+    top: 9px;
+    width: 236px;
+    left: 168px;
+  }
 `;
 const Title = styled.div`
   font-weight: bold;
+  margin-bottom: 10px;
 `;
 const StyledCheckbox = styled.input`
   appearance: none;
-  max-width: 35px;
+  max-width: 37px;
   width: 100%;
-  height: 35px;
-  z-index: 99999;
-
+  height: 37px;
   border-radius: 50%;
-  margin: 10px;
+  margin: 0px;
   outline: none;
   cursor: pointer;
   background-color: #ececec;
@@ -86,19 +89,14 @@ const StyledCheckbox = styled.input`
   }
 `;
 const LabelTag = styled.span`
-  position: absolute;
-  top: 28px;
-  left: 10px;
-  width: 35px;
-  height: 35px;
-  font-size: 0.8em;
+  position: relative;
+  bottom: 15px;
+  left: -24px;
+  font-size: 11px;
   border-radius: 50%;
-  cursor: pointer;
-  box-sizing: border-box;
   line-height: 35px;
-  text-align: center;
-  color: rgb(27, 26, 32);
-  background-color: rgb(236, 236, 236);
+  color: #1b1a20;
+  background-color: transparent;
   border: 1px solid transparent;
 `;
 
